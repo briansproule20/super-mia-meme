@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
-import { Button } from "@/components/ui/button";
 import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 
 export default function Home() {
@@ -334,7 +333,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.4 }}
             >
-              From Amateurism to Professionalization: How the NCAA's House Settlement Aligns the U.S. with Global Sports Norms
+              From Amateurism to Professionalization: How the NCAA&apos;s House Settlement Aligns the U.S. with Global Sports Norms
             </motion.p>
           </motion.div>
         </motion.div>
