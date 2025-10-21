@@ -53,7 +53,7 @@ export default function Home() {
   }, [mounted]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#F5F5F0] via-[#E8E4DC] to-[#F0EBE3] relative overflow-hidden">
       {/* Floating Otters and Seals - MORE CHAOS */}
       {mounted && (
         <div className="fixed inset-0 pointer-events-none z-0">
@@ -93,27 +93,50 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#3F3B30] mb-4 sm:mb-6 flex flex-wrap justify-center gap-x-2 sm:gap-x-3"
           >
-            {["S", "U", "P", "E", "R", " ", "M", "I", "A"].map((letter, i) => (
-              <motion.span
-                key={i}
-                className={letter === " " ? "inline-block w-4 sm:w-8" : "inline-block"}
-                animate={{
-                  y: [0, -30, 0, -15, 0],
-                  rotate: [0, 15, -15, 10, -10, 0],
-                  scale: [1, 1.2, 0.9, 1.1, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: i * 0.15,
-                  ease: "easeInOut",
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
+            <div className="flex">
+              {["M", "I", "A"].map((letter, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block"
+                  animate={{
+                    y: [0, -30, 0, -15, 0],
+                    rotate: [0, 15, -15, 10, -10, 0],
+                    scale: [1, 1.2, 0.9, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: i * 0.15,
+                    ease: "easeInOut",
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </div>
+            <div className="flex">
+              {["M", "A", "S", "S", "I", "M", "O"].map((letter, i) => (
+                <motion.span
+                  key={i + 3}
+                  className="inline-block"
+                  animate={{
+                    y: [0, -30, 0, -15, 0],
+                    rotate: [0, 15, -15, 10, -10, 0],
+                    scale: [1, 1.2, 0.9, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: (i + 4) * 0.15,
+                    ease: "easeInOut",
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </div>
           </motion.h1>
         </div>
 
@@ -130,12 +153,18 @@ export default function Home() {
           }}
           className="flex justify-center mb-12 sm:mb-16"
         >
-          <motion.div
-            className="relative"
+          <motion.a
+            href="https://www.linkedin.com/in/mia-massimo-252703226/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative cursor-pointer"
             animate={{
               rotate: [0, 3, -3, 2, -2, 0],
               scale: [1, 1.02, 0.98, 1.01, 0.99, 1],
               y: [0, -10, 0, -5, 0],
+            }}
+            whileHover={{
+              scale: 1.05,
             }}
             transition={{
               duration: 5,
@@ -155,13 +184,13 @@ export default function Home() {
               style={{ transformStyle: "preserve-3d" }}
             >
               <PixelatedCanvas
-                src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=2574&auto=format&fit=crop"
+                src="/mia-selfie.png"
                 width={canvasSize.width}
                 height={canvasSize.height}
                 cellSize={4}
                 dotScale={0.9}
                 shape="square"
-                backgroundColor="#000000"
+                backgroundColor="#D1C0A9"
                 dropoutStrength={0.1}
                 interactive
                 distortionStrength={0.15}
@@ -171,18 +200,18 @@ export default function Home() {
                 jitterStrength={3}
                 jitterSpeed={1}
                 sampleAverage
-                className="rounded-2xl shadow-2xl border border-slate-800"
+                className="rounded-2xl shadow-2xl border-2 border-[#8B775A]"
               />
             </motion.div>
 
-            {/* Multiple Pulsing glows with different colors */}
+            {/* Multiple Pulsing glows with palette colors */}
             <motion.div
-              className="absolute inset-0 rounded-2xl border-2 border-purple-500/50 pointer-events-none"
+              className="absolute inset-0 rounded-2xl border-2 border-[#8B775A]/50 pointer-events-none"
               animate={{
                 boxShadow: [
-                  "0 0 20px rgba(168,85,247,0.3)",
-                  "0 0 80px rgba(168,85,247,0.8)",
-                  "0 0 20px rgba(168,85,247,0.3)",
+                  "0 0 20px rgba(139,119,90,0.3)",
+                  "0 0 80px rgba(139,119,90,0.8)",
+                  "0 0 20px rgba(139,119,90,0.3)",
                 ],
                 scale: [1, 1.05, 1],
               }}
@@ -192,12 +221,12 @@ export default function Home() {
               }}
             />
             <motion.div
-              className="absolute inset-0 rounded-2xl border-2 border-pink-500/50 pointer-events-none"
+              className="absolute inset-0 rounded-2xl border-2 border-[#705F4B]/50 pointer-events-none"
               animate={{
                 boxShadow: [
-                  "0 0 20px rgba(236,72,153,0.3)",
-                  "0 0 80px rgba(236,72,153,0.8)",
-                  "0 0 20px rgba(236,72,153,0.3)",
+                  "0 0 20px rgba(112,95,75,0.3)",
+                  "0 0 80px rgba(112,95,75,0.8)",
+                  "0 0 20px rgba(112,95,75,0.3)",
                 ],
                 scale: [1, 1.05, 1],
               }}
@@ -208,12 +237,12 @@ export default function Home() {
               }}
             />
             <motion.div
-              className="absolute inset-0 rounded-2xl border-2 border-cyan-500/50 pointer-events-none"
+              className="absolute inset-0 rounded-2xl border-2 border-[#BA9F86]/50 pointer-events-none"
               animate={{
                 boxShadow: [
-                  "0 0 20px rgba(6,182,212,0.3)",
-                  "0 0 80px rgba(6,182,212,0.8)",
-                  "0 0 20px rgba(6,182,212,0.3)",
+                  "0 0 20px rgba(186,159,134,0.3)",
+                  "0 0 80px rgba(186,159,134,0.8)",
+                  "0 0 20px rgba(186,159,134,0.3)",
                 ],
                 scale: [1, 1.05, 1],
               }}
@@ -223,109 +252,99 @@ export default function Home() {
                 delay: 1,
               }}
             />
-          </motion.div>
+          </motion.a>
         </motion.div>
 
-        {/* CTA Buttons with EXTREME FLIPS */}
+        {/* University of Miami Logo Link */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0, rotate: -360 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{
-            duration: 0.8,
+            duration: 1.5,
             delay: 0.7,
             type: "spring",
-            stiffness: 150,
+            stiffness: 120,
           }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col items-center gap-4"
         >
-          <motion.div
+          <motion.a
+            href="https://international-and-comparative-law-review.law.miami.edu/from-amateurism-to-professionalization-how-the-ncaas-house-settlement-aligns-the-u-s-with-global-sports-norms/"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{
               scale: 1.2,
               rotate: [0, -10, 10, -10, 10, 0],
-              y: [-5, -10, -5],
+              y: [-5, -15, -5],
             }}
             whileTap={{
-              scale: 0.9,
-              rotate: 180,
+              scale: 0.85,
+              rotate: 720,
             }}
             animate={{
-              y: [0, -5, 0],
+              rotate: [0, 5, -5, 3, -3, 0],
+              y: [0, -8, 0, -4, 0],
+              scale: [1, 1.05, 1, 1.03, 1],
             }}
             transition={{
-              y: {
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="cursor-pointer"
+          >
+            <motion.img
+              src="/Miami_Hurricanes_logo.svg.png"
+              alt="University of Miami"
+              className="w-24 h-24 sm:w-32 sm:h-32 object-contain"
+              animate={{
+                filter: [
+                  "drop-shadow(0 0 10px rgba(244,121,32,0.5))",
+                  "drop-shadow(0 0 30px rgba(244,121,32,0.9))",
+                  "drop-shadow(0 0 10px rgba(244,121,32,0.5))",
+                ],
+              }}
+              transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: "easeInOut",
-              },
-            }}
-          >
-            <Button
-              size="lg"
-              className="bg-white text-black hover:bg-slate-200 font-semibold shadow-2xl"
-            >
-              <motion.span
-                animate={{
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                }}
-              >
-                Share
-              </motion.span>
-            </Button>
-          </motion.div>
+              }}
+            />
+          </motion.a>
 
           <motion.div
-            whileHover={{
-              scale: 1.2,
-              rotate: [0, 10, -10, 10, -10, 0],
-              y: [-5, -10, -5],
-            }}
-            whileTap={{
-              scale: 0.9,
-              rotate: -180,
-            }}
-            animate={{
-              y: [0, -5, 0],
-            }}
-            transition={{
-              y: {
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="text-center max-w-md px-4"
+          >
+            <motion.p
+              className="text-[#705F4B] text-sm sm:text-base font-semibold mb-1"
+              animate={{
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.3,
-              },
-            }}
-          >
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-slate-700 text-white hover:bg-slate-800 shadow-2xl"
+              }}
             >
-              <motion.span
-                animate={{
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  delay: 0.3,
-                }}
-              >
-                Learn More
-              </motion.span>
-            </Button>
+              Read law review publication
+            </motion.p>
+            <motion.p
+              className="text-[#3F3B30]/80 text-xs sm:text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.4 }}
+            >
+              From Amateurism to Professionalization: How the NCAA's House Settlement Aligns the U.S. with Global Sports Norms
+            </motion.p>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Floating background elements for extra chaos */}
+      {/* Floating background elements with earth tones */}
       {mounted && (
         <>
           <motion.div
-            className="fixed top-20 left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"
+            className="fixed top-20 left-10 w-40 h-40 bg-[#8B775A]/10 rounded-full blur-3xl pointer-events-none"
             animate={{
               x: [0, 100, 0],
               y: [0, 50, 0],
@@ -338,7 +357,7 @@ export default function Home() {
             }}
           />
           <motion.div
-            className="fixed bottom-20 right-10 w-60 h-60 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"
+            className="fixed bottom-20 right-10 w-60 h-60 bg-[#BA9F86]/10 rounded-full blur-3xl pointer-events-none"
             animate={{
               x: [0, -100, 0],
               y: [0, -50, 0],
@@ -351,7 +370,7 @@ export default function Home() {
             }}
           />
           <motion.div
-            className="fixed top-1/2 left-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"
+            className="fixed top-1/2 left-1/2 w-80 h-80 bg-[#705F4B]/10 rounded-full blur-3xl pointer-events-none"
             animate={{
               x: [-100, 100, -100],
               y: [-100, 100, -100],
