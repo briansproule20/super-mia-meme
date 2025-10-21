@@ -28,18 +28,18 @@ export const metadata: Metadata = {
     description: "otters and seals doing wild flips and flurps. Maximum vibes only.",
     images: [
       {
-        url: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🦭</text></svg>',
-        width: 100,
-        height: 100,
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
         alt: "Seal emoji",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Mia R. Massimo",
-    description: "🦭 Pixel art chaos with otters and seals doing wild flips and flurps. Maximum vibes only.",
-    images: ['data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🦭</text></svg>'],
+    description: "otters and seals doing wild flips and flurps. Maximum vibes only.",
+    images: ['/og-image.png'],
   },
 };
 
