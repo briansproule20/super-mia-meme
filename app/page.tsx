@@ -254,8 +254,8 @@ export default function Home() {
           </motion.a>
         </motion.div>
 
-        {/* University of Miami Logo Link */}
-        <motion.div
+        {/* University of Miami Logo Link - HIDDEN */}
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0, rotate: -360 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{
@@ -336,7 +336,7 @@ export default function Home() {
               From Amateurism to Professionalization: How the NCAA&apos;s House Settlement Aligns the U.S. with Global Sports Norms
             </motion.p>
           </motion.div>
-        </motion.div>
+        </motion.div> */}
       </section>
 
       {/* Floating background elements with earth tones */}
