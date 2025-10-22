@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🦭</text></svg>',
-        type: 'image/svg+xml',
+        url: '/mrm favicon.png',
+        type: 'image/png',
       },
     ],
   },
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
     description: "otters and seals doing wild flips and flurps. Maximum vibes only.",
     images: [
       {
-        url: '/og-image.png',
+        url: '/mrm favicon.png',
         width: 1200,
         height: 630,
-        alt: "Seal emoji",
+        alt: "Mia R. Massimo",
       },
     ],
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mia R. Massimo",
     description: "otters and seals doing wild flips and flurps. Maximum vibes only.",
-    images: ['/og-image.png'],
+    images: ['/mrm favicon.png'],
   },
 };
 
