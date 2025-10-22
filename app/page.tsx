@@ -95,7 +95,6 @@ export default function Home() {
                     className="rounded-2xl shadow-lg border-2 border-[#8B775A]"
                   />
                 )}
-                <div className="absolute inset-0 rounded-2xl bg-black/0 hover:bg-black/5 transition-colors duration-200"></div>
               </div>
             </motion.div>
           </div>
