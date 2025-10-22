@@ -95,11 +95,7 @@ export default function Home() {
                     className="rounded-2xl shadow-lg border-2 border-[#8B775A]"
                   />
                 )}
-                <div className="absolute inset-0 rounded-2xl bg-black/0 hover:bg-black/5 transition-colors duration-200 flex items-center justify-center">
-                  <span className="text-white text-sm font-medium opacity-0 hover:opacity-100 transition-opacity duration-200 bg-black/50 px-3 py-1 rounded-full">
-                    Click to reveal
-                  </span>
-                </div>
+                <div className="absolute inset-0 rounded-2xl bg-black/0 hover:bg-black/5 transition-colors duration-200"></div>
               </div>
             </motion.div>
           </div>
