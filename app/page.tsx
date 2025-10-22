@@ -1,388 +1,289 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
+import { Navigation } from "@/components/navigation";
 import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
+import { Card } from "@/components/ui/card";
+import { Mail, Linkedin, FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
-  const [canvasSize, setCanvasSize] = useState({ width: 600, height: 600 });
-
-  useEffect(() => {
-    setMounted(true);
-
-    const updateSize = () => {
-      if (window.innerWidth < 640) {
-        setCanvasSize({ width: 320, height: 320 });
-      } else if (window.innerWidth < 1024) {
-        setCanvasSize({ width: 500, height: 500 });
-      } else {
-        setCanvasSize({ width: 600, height: 600 });
-      }
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  // Generate consistent positions for floating emojis
-  const floatingPositions = useMemo(() => {
-    if (!mounted) return [];
-    return [...Array(30)].map(() => ({
-      initial: {
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-      },
-      animate: {
-        x: [
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-        ],
-        y: [
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-        ],
-      },
-    }));
-  }, [mounted]);
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F5F5F0] via-[#E8E4DC] to-[#F0EBE3] relative overflow-hidden">
-      {/* Floating Otters and Seals - MORE CHAOS */}
-      {mounted && (
-        <div className="fixed inset-0 pointer-events-none z-0">
-          {[...Array(30)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute text-4xl sm:text-6xl"
-              style={{
-                left: `${floatingPositions[i].initial.x}%`,
-                top: `${floatingPositions[i].initial.y}%`,
-              }}
-              animate={{
-                x: floatingPositions[i].animate.x.map(v => `${v}vw`),
-                y: floatingPositions[i].animate.y.map(v => `${v}vh`),
-                rotate: [0, 360, 720, 1080, 1440],
-                scale: [1, 1.5, 0.5, 1.2, 1],
-                rotateX: [0, 180, 360, 540, 720],
-                rotateY: [0, 180, 360, 540, 720],
-              }}
-              transition={{
-                duration: 15 + i * 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "easeInOut",
-              }}
-            >
-              {i % 2 === 0 ? "🦦" : "🦭"}
-            </motion.div>
-          ))}
-        </div>
-      )}
+    <div className="min-h-screen bg-gradient-to-br from-[#F5F5F0] via-[#E8E4DC] to-[#F0EBE3] dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+      <Navigation />
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 sm:py-20 max-w-6xl relative z-10">
-        <div className="text-center mb-12 sm:mb-16">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#3F3B30] mb-4 sm:mb-6 flex flex-wrap justify-center gap-x-2 sm:gap-x-3"
-          >
-            <div className="flex">
-              {["M", "I", "A"].map((letter, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block"
-                  animate={{
-                    y: [0, -30, 0, -15, 0],
-                    rotate: [0, 15, -15, 10, -10, 0],
-                    scale: [1, 1.2, 0.9, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: i * 0.15,
-                    ease: "easeInOut",
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </div>
-            <div className="flex">
-              {["M", "A", "S", "S", "I", "M", "O"].map((letter, i) => (
-                <motion.span
-                  key={i + 3}
-                  className="inline-block"
-                  animate={{
-                    y: [0, -30, 0, -15, 0],
-                    rotate: [0, 15, -15, 10, -10, 0],
-                    scale: [1, 1.2, 0.9, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: (i + 4) * 0.15,
-                    ease: "easeInOut",
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </div>
-          </motion.h1>
-        </div>
-
-        {/* Canvas with EXTREME FLURPS */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{
-            duration: 1.2,
-            delay: 0.3,
-            type: "spring",
-            stiffness: 100,
-            damping: 15,
-          }}
-          className="flex justify-center mb-12 sm:mb-16"
-        >
-          <motion.a
-            href="https://www.linkedin.com/in/mia-massimo-252703226/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative cursor-pointer"
-            animate={{
-              rotate: [0, 3, -3, 2, -2, 0],
-              scale: [1, 1.02, 0.98, 1.01, 0.99, 1],
-              y: [0, -10, 0, -5, 0],
-            }}
-            whileHover={{
-              scale: 1.05,
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
+      <section id="home" className="pt-24 pb-16 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
-              animate={{
-                rotateY: [0, 360],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{ transformStyle: "preserve-3d" }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              <PixelatedCanvas
-                src="/mia-selfie.png"
-                width={canvasSize.width}
-                height={canvasSize.height}
-                cellSize={4}
-                dotScale={0.9}
-                shape="square"
-                backgroundColor="#D1C0A9"
-                dropoutStrength={0.1}
-                interactive
-                distortionStrength={0.15}
-                distortionRadius={200}
-                distortionMode="swirl"
-                followSpeed={0.15}
-                jitterStrength={3}
-                jitterSpeed={1}
-                sampleAverage
-                className="rounded-2xl shadow-2xl border-2 border-[#8B775A]"
-              />
+              <h1 className="text-4xl md:text-5xl font-bold text-[#3F3B30] dark:text-gray-100 mb-4">
+                Mia R. Massimo
+              </h1>
+              <p className="text-xl text-[#705F4B] dark:text-gray-400 mb-6">
+                Aspiring Attorney | Legal Scholar
+              </p>
+              <p className="text-base text-[#3F3B30]/80 dark:text-gray-300 mb-8 leading-relaxed">
+                Passionate about sports law, international law, and advancing justice through
+                thoughtful legal practice. Currently pursuing a Juris Doctor with a focus on
+                comparative and international legal frameworks.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  asChild
+                  className="bg-[#8B775A] hover:bg-[#705F4B] text-white"
+                >
+                  <a
+                    href="https://www.linkedin.com/in/mia-massimo-252703226/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Linkedin className="mr-2 h-4 w-4" />
+                    LinkedIn
+                  </a>
+                </Button>
+                <Button variant="outline" asChild>
+                  <a href="#contact">
+                    <Mail className="mr-2 h-4 w-4" />
+                    Contact
+                  </a>
+                </Button>
+              </div>
             </motion.div>
 
-            {/* Multiple Pulsing glows with palette colors */}
             <motion.div
-              className="absolute inset-0 rounded-2xl border-2 border-[#8B775A]/50 pointer-events-none"
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(139,119,90,0.3)",
-                  "0 0 80px rgba(139,119,90,0.8)",
-                  "0 0 20px rgba(139,119,90,0.3)",
-                ],
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-              }}
-            />
-            <motion.div
-              className="absolute inset-0 rounded-2xl border-2 border-[#705F4B]/50 pointer-events-none"
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(112,95,75,0.3)",
-                  "0 0 80px rgba(112,95,75,0.8)",
-                  "0 0 20px rgba(112,95,75,0.3)",
-                ],
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: 0.5,
-              }}
-            />
-            <motion.div
-              className="absolute inset-0 rounded-2xl border-2 border-[#BA9F86]/50 pointer-events-none"
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(186,159,134,0.3)",
-                  "0 0 80px rgba(186,159,134,0.8)",
-                  "0 0 20px rgba(186,159,134,0.3)",
-                ],
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                delay: 1,
-              }}
-            />
-          </motion.a>
-        </motion.div>
-
-        {/* University of Miami Logo Link - HIDDEN */}
-        {/* <motion.div
-          initial={{ opacity: 0, scale: 0, rotate: -360 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{
-            duration: 1.5,
-            delay: 0.7,
-            type: "spring",
-            stiffness: 120,
-          }}
-          className="flex flex-col items-center gap-4"
-        >
-          <motion.a
-            href="https://international-and-comparative-law-review.law.miami.edu/from-amateurism-to-professionalization-how-the-ncaas-house-settlement-aligns-the-u-s-with-global-sports-norms/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{
-              scale: 1.2,
-              rotate: [0, -10, 10, -10, 10, 0],
-              y: [-5, -15, -5],
-            }}
-            whileTap={{
-              scale: 0.85,
-              rotate: 720,
-            }}
-            animate={{
-              rotate: [0, 5, -5, 3, -3, 0],
-              y: [0, -8, 0, -4, 0],
-              scale: [1, 1.05, 1, 1.03, 1],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="cursor-pointer"
-          >
-            <motion.img
-              src="/Miami_Hurricanes_logo.svg.png"
-              alt="University of Miami"
-              className="w-24 h-24 sm:w-32 sm:h-32 object-contain"
-              animate={{
-                filter: [
-                  "drop-shadow(0 0 10px rgba(244,121,32,0.5))",
-                  "drop-shadow(0 0 30px rgba(244,121,32,0.9))",
-                  "drop-shadow(0 0 10px rgba(244,121,32,0.5))",
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-              }}
-            />
-          </motion.a>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="text-center max-w-md px-4"
-          >
-            <motion.p
-              className="text-[#705F4B] text-sm sm:text-base font-semibold mb-1"
-              animate={{
-                opacity: [0.8, 1, 0.8],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-              }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex justify-center"
             >
-              Read law review publication
-            </motion.p>
-            <motion.p
-              className="text-[#3F3B30]/80 text-xs sm:text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.4 }}
-            >
-              From Amateurism to Professionalization: How the NCAA&apos;s House Settlement Aligns the U.S. with Global Sports Norms
-            </motion.p>
-          </motion.div>
-        </motion.div> */}
+              <div className="relative">
+                <PixelatedCanvas
+                  src="/mia-selfie.png"
+                  width={300}
+                  height={300}
+                  cellSize={4}
+                  dotScale={0.9}
+                  shape="square"
+                  backgroundColor="#D1C0A9"
+                  dropoutStrength={0.05}
+                  className="rounded-2xl shadow-lg border-2 border-[#8B775A]"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
-      {/* Floating background elements with earth tones */}
-      {mounted && (
-        <>
+      {/* About Section */}
+      <section id="about" className="py-16 px-4 bg-white/50 dark:bg-gray-900/50">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
-            className="fixed top-20 left-10 w-40 h-40 bg-[#8B775A]/10 rounded-full blur-3xl pointer-events-none"
-            animate={{
-              x: [0, 100, 0],
-              y: [0, 50, 0],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-[#3F3B30] dark:text-gray-100 mb-8 text-center">About</h2>
+            <Card className="p-8 bg-white dark:bg-gray-950 border-[#8B775A]/20 dark:border-gray-800">
+              <p className="text-[#3F3B30]/80 dark:text-gray-300 leading-relaxed mb-4">
+                As a law student with a deep interest in the intersection of sports, international
+                relations, and legal frameworks, I am committed to understanding how legal systems
+                can adapt to promote fairness and professionalization in rapidly evolving fields.
+              </p>
+              <p className="text-[#3F3B30]/80 dark:text-gray-300 leading-relaxed">
+                My academic work focuses on comparative law, examining how different legal
+                traditions approach emerging challenges in sports regulation and international
+                governance. I believe in the power of thoughtful legal analysis to drive positive
+                change and create more equitable systems.
+              </p>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
-            className="fixed bottom-20 right-10 w-60 h-60 bg-[#BA9F86]/10 rounded-full blur-3xl pointer-events-none"
-            animate={{
-              x: [0, -100, 0],
-              y: [0, -50, 0],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-[#3F3B30] dark:text-gray-100 mb-8 text-center">Experience</h2>
+            <Card className="p-8 bg-white dark:bg-gray-950 border-[#8B775A]/20 dark:border-gray-800">
+              <div className="flex items-start gap-4">
+                <img
+                  src="/Jacksonville_Jaguars_logo.svg.png"
+                  alt="Jacksonville Jaguars"
+                  className="w-16 h-16 object-contain"
+                />
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-[#3F3B30] dark:text-gray-100 mb-1">
+                    Legal Intern
+                  </h3>
+                  <p className="text-[#705F4B] dark:text-gray-400 font-medium mb-3">
+                    Jacksonville Jaguars
+                  </p>
+                  <p className="text-[#3F3B30]/80 dark:text-gray-300 text-sm leading-relaxed">
+                    Supported the legal team with contract review, compliance matters, and research 
+                    on sports law issues. Gained hands-on experience in professional sports 
+                    organization legal operations and NFL regulatory frameworks.
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-16 px-4 bg-white/50 dark:bg-gray-900/50">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
-            className="fixed top-1/2 left-1/2 w-80 h-80 bg-[#705F4B]/10 rounded-full blur-3xl pointer-events-none"
-            animate={{
-              x: [-100, 100, -100],
-              y: [-100, 100, -100],
-              scale: [1, 2, 1],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </>
-      )}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-[#3F3B30] dark:text-gray-100 mb-8 text-center">Education</h2>
+            <div className="space-y-6">
+              <Card className="p-8 bg-white dark:bg-gray-950 border-[#8B775A]/20 dark:border-gray-800">
+                <div className="flex items-start gap-4">
+                  <img
+                    src="/Miami_Hurricanes_logo.svg.png"
+                    alt="University of Miami"
+                    className="w-16 h-16 object-contain"
+                  />
+                  <div>
+                    <h3 className="text-xl font-semibold text-[#3F3B30] dark:text-gray-100 mb-2">
+                      University of Miami School of Law
+                    </h3>
+                    <p className="text-[#705F4B] dark:text-gray-400 font-medium mb-2">J.D./LL.M. Candidate</p>
+                    <p className="text-[#3F3B30]/70 dark:text-gray-300 text-sm mb-1">
+                      International & Comparative Law Review
+                    </p>
+                    <p className="text-[#3F3B30]/70 dark:text-gray-300 text-sm">
+                      Entertainment, Arts, and Sports Law Honors Program
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-8 bg-white dark:bg-gray-950 border-[#8B775A]/20 dark:border-gray-800">
+                <div className="flex items-start gap-4">
+                  <img
+                    src="/ohio_state_buckeyes_logo_alternate_19736107.png"
+                    alt="The Ohio State University"
+                    className="w-16 h-16 object-contain"
+                  />
+                  <div>
+                    <h3 className="text-xl font-semibold text-[#3F3B30] dark:text-gray-100 mb-2">
+                      The Ohio State University
+                    </h3>
+                    <p className="text-[#705F4B] dark:text-gray-400 font-medium mb-2">Bachelor of Arts, Summa Cum Laude</p>
+                    <p className="text-[#3F3B30]/70 dark:text-gray-300 text-sm mb-1">
+                      Major: Political Science, Pre-Law
+                    </p>
+                    <p className="text-[#3F3B30]/70 dark:text-gray-300 text-sm font-medium">
+                      GPA: 4.0
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Publications Section */}
+      <section id="publications" className="py-16 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-[#3F3B30] dark:text-gray-100 mb-8 text-center">Publications</h2>
+            <Card className="p-8 bg-white dark:bg-gray-950 border-[#8B775A]/20 dark:border-gray-800 hover:border-[#8B775A]/40 dark:hover:border-gray-700 transition-colors">
+              <div className="flex items-start gap-4">
+                <FileText className="w-8 h-8 text-[#8B775A] dark:text-gray-400 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold text-[#3F3B30] dark:text-gray-100 mb-2">
+                    From Amateurism to Professionalization: How the NCAA&apos;s House Settlement
+                    Aligns the U.S. with Global Sports Norms
+                  </h3>
+                  <p className="text-[#705F4B] dark:text-gray-400 text-sm mb-4">
+                    University of Miami International and Comparative Law Review
+                  </p>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="border-[#8B775A] text-[#8B775A] hover:bg-[#8B775A] hover:text-white"
+                  >
+                    <a
+                      href="https://international-and-comparative-law-review.law.miami.edu/from-amateurism-to-professionalization-how-the-ncaas-house-settlement-aligns-the-u-s-with-global-sports-norms/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read Publication
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-16 px-4 bg-white/50 dark:bg-gray-900/50">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-[#3F3B30] dark:text-gray-100 mb-8 text-center">Get In Touch</h2>
+            <Card className="p-8 bg-white dark:bg-gray-950 border-[#8B775A]/20 dark:border-gray-800 text-center">
+              <p className="text-[#3F3B30]/80 dark:text-gray-300 mb-6">
+                Interested in connecting? Feel free to reach out via LinkedIn.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#8B775A] hover:bg-[#705F4B] text-white"
+              >
+                <a
+                  href="https://www.linkedin.com/in/mia-massimo-252703226/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="mr-2 h-5 w-5" />
+                  Connect on LinkedIn
+                </a>
+              </Button>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 border-t border-[#8B775A]/20 dark:border-gray-800">
+        <div className="container mx-auto max-w-4xl text-center">
+          <p className="text-[#3F3B30]/60 dark:text-gray-400 text-sm">
+            © {new Date().getFullYear()} Mia R. Massimo. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
