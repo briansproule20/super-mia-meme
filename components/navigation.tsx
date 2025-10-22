@@ -23,7 +23,10 @@ export function Navigation() {
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <a 
+            href="#home" 
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer"
+          >
             <img
               src="/mrm favicon.png"
               alt="MRM"
@@ -32,7 +35,7 @@ export function Navigation() {
             <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               Mia R. Massimo
             </div>
-          </div>
+          </a>
           
           <div className="flex items-center gap-2">
             <ThemeToggle />
