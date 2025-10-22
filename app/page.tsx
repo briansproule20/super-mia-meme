@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Navigation } from "@/components/navigation";
 import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { Card } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import { Mail, Linkedin, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const [showRealImage, setShowRealImage] = useState(false);
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F5F5F0] via-[#E8E4DC] to-[#F0EBE3] dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <Navigation />
@@ -61,18 +63,43 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="flex justify-center"
             >
-              <div className="relative">
-                <PixelatedCanvas
-                  src="/mia pfp.png"
-                  width={300}
-                  height={300}
-                  cellSize={4}
-                  dotScale={0.9}
-                  shape="square"
-                  backgroundColor="#D1C0A9"
-                  dropoutStrength={0.05}
-                  className="rounded-2xl shadow-lg border-2 border-[#8B775A]"
-                />
+              <div 
+                className="relative cursor-pointer"
+                onClick={() => {
+                  setShowRealImage(true);
+                  setTimeout(() => setShowRealImage(false), 2000);
+                }}
+              >
+                {showRealImage ? (
+                  <motion.img
+                    src="/mia pfp.png"
+                    alt="Mia R. Massimo"
+                    width={300}
+                    height={300}
+                    className="rounded-2xl shadow-lg border-2 border-[#8B775A] object-cover"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                ) : (
+                  <PixelatedCanvas
+                    src="/mia pfp.png"
+                    width={300}
+                    height={300}
+                    cellSize={4}
+                    dotScale={0.9}
+                    shape="square"
+                    backgroundColor="#D1C0A9"
+                    dropoutStrength={0.05}
+                    className="rounded-2xl shadow-lg border-2 border-[#8B775A]"
+                  />
+                )}
+                <div className="absolute inset-0 rounded-2xl bg-black/0 hover:bg-black/5 transition-colors duration-200 flex items-center justify-center">
+                  <span className="text-white text-sm font-medium opacity-0 hover:opacity-100 transition-opacity duration-200 bg-black/50 px-3 py-1 rounded-full">
+                    Click to reveal
+                  </span>
+                </div>
               </div>
             </motion.div>
           </div>
