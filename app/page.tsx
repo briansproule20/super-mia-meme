@@ -63,7 +63,7 @@ export default function Home() {
             >
               <div className="relative">
                 <PixelatedCanvas
-                  src="/mia-selfie.png"
+                  src="/mia pfp.png"
                   width={300}
                   height={300}
                   cellSize={4}
